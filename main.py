@@ -8,10 +8,10 @@ def get_birthdays_per_week(users):
     result = {}
     
     if date.today().weekday() == 0:
-        current_day = date.today() + timedelta(days=-2)
+        current_day = date.today() + timedelta(days = -2)
     else:
         current_day = date.today() 
-    end_day = current_day + timedelta(days=6)
+    end_day = current_day + timedelta(days = 6)
     
     days = list()
     months = set()
@@ -26,33 +26,37 @@ def get_birthdays_per_week(users):
             fullname = user.get('name').split(' ')
             name = fullname[0]
 
-            birthday = datetime(current_day.year, user.get('birthday').month, user.get('birthday').day).date() if current_day.year != end_day.year and user.get('birthday').month == 12 else datetime(end_day.year, user.get('birthday').month, user.get('birthday').day).date()
+            birthday = ( 
+                datetime(current_day.year, user.get('birthday').month, user.get('birthday').day).date() 
+                if current_day.year != end_day.year and user.get('birthday').month == 12 
+                else datetime(end_day.year, user.get('birthday').month, user.get('birthday').day).date()
+            )
             
             if birthday.weekday() in [0, 5, 6]:  
-                if "Monday" in result:
-                    result["Monday"].append(name)
+                if 'Monday' in result:
+                    result['Monday'].append(name)
                 else:
-                    result["Monday"] = [name]  
+                    result['Monday'] = [name]  
             elif birthday.weekday() == 1:
-                if "Tuesday" in result:
-                    result["Tuesday"].append(name)
+                if 'Tuesday' in result:
+                    result['Tuesday'].append(name)
                 else:
-                    result["Tuesday"] = [name]
+                    result['Tuesday'] = [name]
             elif birthday.weekday() == 2:
-                if "Wednesday" in result:
-                    result["Wednesday"].append(name)
+                if 'Wednesday' in result:
+                    result['Wednesday'].append(name)
                 else:
-                    result["Wednesday"] = [name]
+                    result['Wednesday'] = [name]
             elif birthday.weekday() == 3:
-                if "Thursday" in result:
-                    result["Thursday"].append(name)
+                if 'Thursday' in result:
+                    result['Thursday'].append(name)
                 else:
-                    result["Thursday"] = [name]
+                    result['Thursday'] = [name]
             else:
-                if "Friday" in result:
-                    result["Friday"].append(name)
+                if 'Friday' in result:
+                    result['Friday'].append(name)
                 else:
-                    result["Friday"] = [name]
+                    result['Friday'] = [name]
 
             noboirthdays = False
 
@@ -62,12 +66,12 @@ def get_birthdays_per_week(users):
         return result
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     users = [
-        {"name": "Jan Koum", "birthday": datetime(1976, 12, 31).date()},
-        {"name": "Jany Koumy", "birthday": datetime(1976, 1, 3).date()},
-        {"name": "BJan BKoum", "birthday": datetime(1976, 12, 30).date()},
-        {"name": "DonJan DonKoum", "birthday": datetime(1976, 1, 5).date()},
+        {'name': 'Jan Koum', 'birthday': datetime(1976, 12, 31).date()},
+        {'name': 'Jany Koumy', 'birthday': datetime(1976, 1, 3).date()},
+        {'name': 'BJan BKoum', 'birthday': datetime(1976, 12, 30).date()},
+        {'name': 'DonJan DonKoum', 'birthday': datetime(1976, 1, 5).date()},
         {'name': 'John', 'birthday': datetime(2023, 12, 31).date()}, 
         {'name': 'Doe', 'birthday': datetime(2024, 1, 1).date()}, 
         {'name': 'Alice', 'birthday': datetime(2023, 12, 29).date()},
